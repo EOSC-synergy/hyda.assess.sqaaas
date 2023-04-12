@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.9
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/elnazazmi/hyda:
+      branch: master
+      repo: https://gitlab.com/elnazazmi/hyda
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/elnazazmi/hyda git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-seashell-neanderthal.sh
+        container: qc.acc_sickly-aqua-falcon
+  QC.Doc:
+    repos:
+      gitlab.com/elnazazmi/hyda find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-cream-cockroach.sh
+        container: qc.doc_gamy-bronze-badger
+      gitlab.com/elnazazmi/hyda git:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-asparagus-coyote.sh
+        container: qc.doc_foggy-salmon-koala
+      gitlab.com/elnazazmi/hyda markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-corn-quail.sh
+        container: qc.doc_seedy-eggplant-giraffe
+  QC.Lic:
+    repos:
+      gitlab.com/elnazazmi/hyda licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-pink-boar.sh
+        container: qc.lic_geeky-orchid-hornet
+  QC.Sec:
+    repos:
+      gitlab.com/elnazazmi/hyda bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-thistle-gharial.sh
+        container: qc.sec_stuffy-seashell-millipede
+  QC.Sty:
+    repos:
+      gitlab.com/elnazazmi/hyda flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-eggplant-mouse.sh
+        container: qc.sty_stuffy-apricot-wasp
+  QC.Ver:
+    repos:
+      gitlab.com/elnazazmi/hyda get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-sepia-horse.sh
+        container: qc.ver_gimpy-ivory-tapir
+timeout: 5400
